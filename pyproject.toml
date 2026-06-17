@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "neurosonic"
+version = "0.1.0"
+description = "Conditional flow matching for EEG-to-speech reconstruction"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "torch==2.5.1",
+  "torchvision==0.20.1",
+  "numpy==1.22",
+  "tensorboard==2.10.0",
+  "opencv-python==4.11.0.86",
+  "timm==0.9.12",
+  "scipy==1.9.1",
+  "einops==0.8.1",
+  "gdown==5.2.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["neurosonic*"]

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NeuroSonic: Conditional Flow Matching for EEG-to-Speech Reconstruction</title>
+    <meta property="og:title" content="NeuroSonic">
+    <meta property="og:description" content="Conditional flow matching for EEG-to-speech reconstruction.">
+    <meta name="twitter:card" content="summary_large_image">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400,600,700" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            background: #f7f8fb;
+            color: #222831;
+            font-family: "Titillium Web", "Helvetica Neue", Arial, sans-serif;
+            font-size: 18px;
+            font-weight: 300;
+        }
+        a { color: #176b87; text-decoration: none; }
+        a:hover { color: #0f4c5c; }
+        .page {
+            width: min(1120px, calc(100% - 40px));
+            margin: 0 auto;
+            padding: 32px 0 60px;
+        }
+        h1 {
+            margin: 8px auto 14px;
+            max-width: 900px;
+            text-align: center;
+            font-size: clamp(34px, 5vw, 52px);
+            line-height: 1.08;
+            font-weight: 600;
+            color: #12343b;
+        }
+        h2 {
+            margin: 44px 0 8px;
+            font-size: 1.65em;
+            font-weight: 600;
+            color: #12343b;
+        }
+        h3 {
+            margin: 26px 0 8px;
+            font-size: 1.18em;
+            font-weight: 600;
+            color: #12343b;
+        }
+        p { line-height: 1.56; }
+        hr {
+            border: 0;
+            border-top: 1px solid #d9dee7;
+            margin: 0 0 20px;
+        }
+        .authors, .affiliations, .links, .venue {
+            text-align: center;
+        }
+        .authors {
+            margin-top: 10px;
+            font-size: 21px;
+            line-height: 1.75;
+        }
+        .authors a, .authors span {
+            display: inline-block;
+            padding: 0 6px;
+            color: #1d1f23;
+        }
+        .authors sup { font-size: 12px; color: #48505a; }
+        .affiliations {
+            margin: 8px auto 20px;
+            color: #3f4750;
+            line-height: 1.5;
+        }
+        .venue {
+            color: #176b87;
+            font-weight: 600;
+            letter-spacing: 0;
+            margin: 6px 0;
+        }
+        .links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 22px;
+            margin: 26px 0 20px;
+            font-size: 21px;
+        }
+        .links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #12343b;
+        }
+        .hero-figure, .figure {
+            margin: 18px 0 8px;
+            text-align: center;
+        }
+        .hero-figure img, .figure img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 6px;
+            background: #fff;
+            border: 1px solid #e1e5ec;
+        }
+        .caption {
+            margin: 10px auto 18px;
+            color: #404852;
+            font-size: 16px;
+            line-height: 1.45;
+            text-align: center;
+            max-width: 980px;
+        }
+        blockquote {
+            margin: 20px 0;
+            padding: 20px 26px;
+            background: #e9f4f7;
+            border-left: 4px solid #176b87;
+            border-radius: 0 6px 6px 0;
+            line-height: 1.55;
+        }
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            margin: 18px 0 6px;
+        }
+        .key-point {
+            background: #fff;
+            border: 1px solid #dde4ea;
+            border-radius: 8px;
+            padding: 16px 18px;
+        }
+        .key-point h3 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+        .key-point p {
+            margin-bottom: 0;
+            color: #4f5965;
+            font-size: 16px;
+        }
+        .table-wrap {
+            overflow-x: auto;
+            margin: 18px 0 26px;
+            background: #fff;
+            border: 1px solid #dde4ea;
+            border-radius: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 720px;
+            font-size: 16px;
+        }
+        th, td {
+            padding: 9px 10px;
+            border-bottom: 1px solid #e4e8ef;
+            text-align: center;
+            white-space: nowrap;
+        }
+        th {
+            background: #e9f4f7;
+            color: #12343b;
+            font-weight: 600;
+        }
+        tr:last-child td { border-bottom: 0; }
+        td.method { text-align: left; font-weight: 400; }
+        tr.ours { background: #f0fbfd; font-weight: 600; }
+        .best { color: #0f6f7f; font-weight: 700; }
+        .fig-row {
+            display: grid;
+            grid-template-columns: 54fr 46fr;
+            gap: 26px;
+            align-items: center;
+            margin: 28px 0;
+        }
+        .fig-row.reverse { grid-template-columns: 46fr 54fr; }
+        .fig-row.reverse .fig-col { order: 2; }
+        .fig-row.spectral-row {
+            grid-template-columns: 34fr 66fr;
+            align-items: center;
+            gap: 34px;
+        }
+        .fig-row.spectral-row .fig-col {
+            align-self: center;
+        }
+        .fig-row img {
+            width: 100%;
+            display: block;
+            border-radius: 6px;
+            border: 1px solid #e1e5ec;
+            background: #fff;
+        }
+        .text-col p { margin: 8px 0; }
+        pre {
+            overflow-x: auto;
+            padding: 20px 22px;
+            background: #eef1f5;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+        code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+        @media (max-width: 780px) {
+            body { font-size: 17px; }
+            .page { width: min(100% - 24px, 1000px); padding-top: 20px; }
+            .links { gap: 14px; font-size: 19px; }
+            .fig-row, .fig-row.reverse { grid-template-columns: 1fr; }
+            .fig-row.reverse .fig-col { order: 0; }
+        }
+    </style>
+</head>
+<body>
+<main class="page">
+    <div class="paper-title">
+        <h1>NeuroSonic: Conditional Flow Matching for EEG-to-Speech Reconstruction</h1>
+        <div class="venue">MICCAI 2026</div>
+    </div>
+
+    <section id="authors">
+        <div class="authors">
+            <a href="mailto:gaowh623@gmail.com">Wenhao Gao<sup>1</sup></a>
+            <a href="https://yfwang.me" target="_blank" rel="noopener noreferrer">Yifan Wang<sup>1</sup></a>
+            <span>Yijia Ma<sup>2</sup></span>
+            <a href="https://www.cs.emory.edu/~jyang71/" target="_blank" rel="noopener noreferrer">Carl Yang<sup>3</sup></a>
+            <a href="https://med.uth.edu/psychiatry/2023/12/19/wen-li-phd/" target="_blank" rel="noopener noreferrer">Wen Li<sup>2</sup></a>
+            <a href="https://chenyuyou.me" target="_blank" rel="noopener noreferrer">Chenyu You<sup>1</sup></a>
+        </div>
+        <div class="affiliations">
+            <span><sup>1</sup>Stony Brook University</span>&nbsp;&nbsp;
+            <span><sup>2</sup>UTHealth Houston</span>&nbsp;&nbsp;
+            <span><sup>3</sup>Emory University</span>
+        </div>
+        <div class="links">
+            <a href=""><span class="ai ai-arxiv"></span> arXiv</a>
+            <a href="https://github.com/ghh1251/my_miccai"><span class="fab fa-github"></span> Code</a>
+            <a href=""><span class="fa-solid fa-database"></span> Hugging Face</a>
+        </div>
+    </section>
+
+    <div class="hero-figure">
+        <img src="figures/architecture.png" alt="NeuroSonic overview">
+    </div>
+    <p class="caption">
+        <b>Overview of NeuroSonic.</b> EEG and audio signals are embedded into a shared token space and processed by a time-conditioned gated Transformer that parameterizes the probability-flow ordinary differential equation.
+    </p>
+
+    <section id="overview">
+        <h2>Overview</h2>
+        <hr>
+        <p>
+            Reconstructing continuous speech from scalp electroencephalography (EEG) entails coupling two signals with markedly different structure. EEG recordings are low-amplitude, spatially diffuse projections of distributed cortical sources, while speech evolves along a highly organized acoustic trajectory characterized by harmonic structure and temporal coherence.
+        </p>
+        <blockquote>
+            NeuroSonic formulates EEG-to-speech reconstruction as conditional acoustic transport. Instead of predicting waveforms in a single step or refining them through stochastic sampling, it learns a deterministic velocity field that maps corrupted acoustic states toward clean speech under EEG conditioning.
+        </blockquote>
+    </section>
+
+    <section id="method">
+        <h2>Method</h2>
+        <hr>
+        <p>
+            Given paired EEG-audio samples \((E, X)\), NeuroSonic constructs a corrupted acoustic state \(z_t = tX + (1-t)\epsilon\), where \(\epsilon \sim \mathcal{N}(0, I)\), and learns a velocity field that transports \(z_t\) toward clean speech under EEG conditioning.
+        </p>
+        <h3>Conditional acoustic transport</h3>
+        <p>At inference, the learned ODE is integrated from \(t=0\) to \(t=1\) using a fixed-step Heun solver, yielding deterministic reconstruction conditioned on neural activity.</p>
+        <p>Rather than regressing waveforms directly, NeuroSonic supervises transport dynamics in velocity space. This anchors learning on clean acoustic states and improves robustness under low-SNR and heterogeneous neural conditioning.</p>
+    </section>
+
+    <section id="results">
+        <h2>Results</h2>
+        <hr>
+        <p>
+            NeuroSonic is evaluated on CineBrain and EAV under cross-subject evaluation. Across both datasets, it improves distributional realism, spectral fidelity, and perceptual quality compared with representative GAN-, diffusion-, and mean-flow baselines.
+        </p>
+
+        <h3>Objective Reconstruction Quality</h3>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dataset</th>
+                        <th>Method</th>
+                        <th>FAD &darr;</th>
+                        <th>LSD &darr;</th>
+                        <th>SC &darr;</th>
+                        <th>Time (s) &darr;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>CineBrain</td><td class="method">MF</td><td>173.65 &plusmn; 0.26</td><td>69.78 &plusmn; 0.11</td><td>1.34 &plusmn; 0.09</td><td>0.04</td></tr>
+                    <tr><td>CineBrain</td><td class="method">GAN</td><td>57.12 &plusmn; 3.49</td><td>15.13 &plusmn; 0.14</td><td>1.25 &plusmn; 0.11</td><td class="best">0.02</td></tr>
+                    <tr><td>CineBrain</td><td class="method">DM</td><td>72.56 &plusmn; 1.69</td><td>22.08 &plusmn; 0.07</td><td>1.12 &plusmn; 0.04</td><td>2.00</td></tr>
+                    <tr class="ours"><td>CineBrain</td><td class="method">NeuroSonic</td><td class="best">39.06 &plusmn; 0.52</td><td class="best">14.24 &plusmn; 0.31</td><td class="best">0.64 &plusmn; 0.04</td><td>0.86</td></tr>
+                    <tr><td>EAV</td><td class="method">MF</td><td>85.27 &plusmn; 0.80</td><td>29.25 &plusmn; 0.64</td><td>1.49 &plusmn; 0.06</td><td>0.04</td></tr>
+                    <tr><td>EAV</td><td class="method">GAN</td><td>39.47 &plusmn; 0.83</td><td>15.71 &plusmn; 0.34</td><td>1.00 &plusmn; 0.01</td><td class="best">0.02</td></tr>
+                    <tr><td>EAV</td><td class="method">DM</td><td>15.87 &plusmn; 6.78</td><td>19.47 &plusmn; 0.25</td><td>1.25 &plusmn; 0.10</td><td>2.08</td></tr>
+                    <tr class="ours"><td>EAV</td><td class="method">NeuroSonic</td><td class="best">11.64 &plusmn; 1.17</td><td class="best">12.98 &plusmn; 0.16</td><td class="best">0.28 &plusmn; 0.02</td><td>1.40</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="figure">
+            <img src="figures/waveform.png" alt="Ground-truth and reconstructed speech">
+        </div>
+        <p class="caption">
+            <b>Ground-truth speech and NeuroSonic reconstructions.</b> The reconstructed signals exhibit coherent formant trajectories and temporal modulation patterns consistent with the reference.
+        </p>
+
+        <div class="fig-row reverse spectral-row">
+            <div class="fig-col">
+                <img src="figures/psd.png" alt="Power spectral density">
+            </div>
+            <div class="text-col">
+                <h3>Spectral fidelity</h3>
+                <p>NeuroSonic aligns most closely with the ground-truth PSD in the low-frequency band that dominates perceived speech quality.</p>
+                <p>GAN outputs exhibit broader spectral deviations, while diffusion models show increased energy in higher-frequency regions.</p>
+            </div>
+        </div>
+
+        <h3>Perceptual Quality</h3>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dataset</th>
+                        <th>Method</th>
+                        <th>SIG &uarr;</th>
+                        <th>BAK &uarr;</th>
+                        <th>OVRL &uarr;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>CineBrain</td><td class="method">GT</td><td>2.41</td><td>1.75</td><td>1.67</td></tr>
+                    <tr><td>CineBrain</td><td class="method">MF</td><td>1.20 &plusmn; 0.01</td><td>1.10 &plusmn; 0.01</td><td>1.10 &plusmn; 0.01</td></tr>
+                    <tr><td>CineBrain</td><td class="method">GAN</td><td>1.26 &plusmn; 0.03</td><td>1.29 &plusmn; 0.01</td><td>1.14 &plusmn; 0.01</td></tr>
+                    <tr><td>CineBrain</td><td class="method">DM</td><td>1.21 &plusmn; 0.00</td><td>1.33 &plusmn; 0.01</td><td>1.07 &plusmn; 0.00</td></tr>
+                    <tr class="ours"><td>CineBrain</td><td class="method">NeuroSonic</td><td class="best">1.95 &plusmn; 0.04</td><td class="best">1.64 &plusmn; 0.04</td><td class="best">1.44 &plusmn; 0.01</td></tr>
+                    <tr><td>EAV</td><td class="method">GT</td><td>3.32</td><td>2.77</td><td>2.47</td></tr>
+                    <tr><td>EAV</td><td class="method">MF</td><td>1.19 &plusmn; 0.01</td><td>1.12 &plusmn; 0.01</td><td>1.08 &plusmn; 0.01</td></tr>
+                    <tr><td>EAV</td><td class="method">GAN</td><td>1.98 &plusmn; 0.01</td><td>2.62 &plusmn; 0.05</td><td>1.45 &plusmn; 0.01</td></tr>
+                    <tr><td>EAV</td><td class="method">DM</td><td>2.92 &plusmn; 0.04</td><td>2.95 &plusmn; 0.10</td><td>2.29 &plusmn; 0.11</td></tr>
+                    <tr class="ours"><td>EAV</td><td class="method">NeuroSonic</td><td class="best">3.31 &plusmn; 0.02</td><td class="best">3.07 &plusmn; 0.04</td><td class="best">2.59 &plusmn; 0.03</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="ablation">
+        <h2>Ablation</h2>
+        <hr>
+        <h3>Clean-state velocity supervision</h3>
+        <p>The direct \(x\)-loss variant can approximate coarse distributional properties, but consistently degrades LSD, SC, and all DNSMOS components across both datasets.</p>
+        <p>Matching endpoints does not constrain the path from noisy to clean states, whereas velocity supervision explicitly trains the transport dynamics.</p>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dataset</th>
+                        <th>Method</th>
+                        <th>FAD &darr;</th>
+                        <th>LSD &darr;</th>
+                        <th>SC &darr;</th>
+                        <th>SIG &uarr;</th>
+                        <th>BAK &uarr;</th>
+                        <th>OVRL &uarr;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>CineBrain</td><td class="method"><em>x</em>-loss</td><td class="best">32.23</td><td>14.27</td><td>0.91</td><td>1.45</td><td>1.30</td><td>1.18</td></tr>
+                    <tr class="ours"><td>CineBrain</td><td class="method">NeuroSonic</td><td>39.06</td><td class="best">14.24</td><td class="best">0.64</td><td class="best">1.95</td><td class="best">1.64</td><td class="best">1.44</td></tr>
+                    <tr><td>EAV</td><td class="method"><em>x</em>-loss</td><td>12.14</td><td>13.45</td><td>0.90</td><td>3.07</td><td>2.66</td><td>2.28</td></tr>
+                    <tr class="ours"><td>EAV</td><td class="method">NeuroSonic</td><td class="best">11.64</td><td class="best">12.98</td><td class="best">0.28</td><td class="best">3.31</td><td class="best">3.07</td><td class="best">2.59</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="citation">
+        <h2>Citation</h2>
+        <hr>
+        <pre><code>@inproceedings{gao2026neurosonic,
+  title     = {NeuroSonic: Conditional Flow Matching for EEG-to-Speech Reconstruction},
+  author    = {Gao, Wenhao and Wang, Yifan and Ma, Yijia and Yang, Carl and Li, Wen and You, Chenyu},
+  booktitle = {Medical Image Computing and Computer Assisted Intervention (MICCAI)},
+  year      = {2026}
+}</code></pre>
+    </section>
+</main>
+</body>
+</html>
