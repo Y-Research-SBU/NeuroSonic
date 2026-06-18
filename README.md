@@ -3,7 +3,9 @@
   <h2>NeuroSonic: Conditional Flow Matching<br> for EEG-to-Speech Reconstruction</h2>
 
   <h4>MICCAI 2026</h4>
-
+  
+  <br>
+  
   <p>
     Wenhao Gao<sup>1</sup>&nbsp;
     Yifan Wang<sup>1</sup><sup><a href="https://yfwang.me/">&#8599;</a></sup>&nbsp;
