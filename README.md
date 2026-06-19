@@ -8,11 +8,11 @@
   
   <p>
     Wenhao Gao<sup>1</sup>&nbsp;
-    Yifan Wang<sup>1</sup><sup><a href="https://yfwang.me/">&#8599;</a></sup>&nbsp;
+    Yifan Wang<sup>1</sup>&nbsp;
     Yijia Ma<sup>2</sup>&nbsp;
-    Carl Yang<sup>3</sup><sup><a href="https://www.cs.emory.edu/~jyang71/">&#8599;</a></sup>&nbsp;
-    Wen Li<sup>2</sup><sup><a href="https://med.uth.edu/psychiatry/2023/12/19/wen-li-phd/">&#8599;</a></sup>&nbsp;
-    Chenyu You<sup>1</sup><sup><a href="https://chenyuyou.me/">&#8599;</a></sup>
+    Carl Yang<sup>3</sup>&nbsp;
+    Wen Li<sup>2</sup>&nbsp;
+    Chenyu You<sup>1</sup>
   </p>
 
   <p>
@@ -73,6 +73,8 @@ NeuroSonic currently supports two dataset backends:
 
 - `eav_input_images`: loads EAV-style prepared per-subject `sub-XX_eeg.npy` and `sub-XX_audio.npy` files.
 - `paired_index`: loads paired EEG/audio arrays using an index file with `subject_id`, `eeg_idx`, and `audio_idx` arrays.
+
+The datasets used in the paper are available from [CineBrain](https://huggingface.co/datasets/Fudan-fMRI/CineBrain) and [EAV](https://zenodo.org/records/13799131).
 
 The prepared directory should contain files such as:
 
