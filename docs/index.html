@@ -192,10 +192,6 @@
             order: 2;
         }
 
-        .fig-row.spectral-row {
-            grid-template-columns: 40fr 60fr;
-        }
-
         .fig-row .text-col h3 {
             margin-top: 0;
         }
@@ -203,6 +199,19 @@
         .fig-row .text-col p {
             margin: 8px 0;
             line-height: 1.55em;
+        }
+
+        .spectral-block {
+            margin: 28px 0;
+        }
+
+        .spectral-block p {
+            margin: 8px 0 12px;
+            line-height: 1.55em;
+        }
+
+        .spectral-figure {
+            margin-top: 10px;
         }
 
         .video-grid {
@@ -315,7 +324,6 @@
             }
 
             .fig-row,
-            .fig-row.spectral-row,
             .video-grid {
                 grid-template-columns: 1fr;
                 gap: 16px;
@@ -481,14 +489,13 @@
             <b>Ground-truth speech and NeuroSonic reconstructions.</b> The reconstructed signals exhibit coherent formant trajectories and temporal modulation patterns consistent with the reference.
         </p>
 
-        <div class="fig-row fig-right spectral-row">
-            <div class="fig-col">
+        <div class="spectral-block">
+            <h3>Spectral fidelity</h3>
+            <p>
+                NeuroSonic aligns most closely with the ground-truth PSD in the low-frequency band that dominates perceived speech quality. GAN outputs exhibit broader spectral deviations, while diffusion models show increased energy in higher-frequency regions.
+            </p>
+            <div class="figure spectral-figure">
                 <img src="figures/psd.png" alt="Power spectral density">
-            </div>
-            <div class="text-col">
-                <h3>Spectral fidelity</h3>
-                <p>NeuroSonic aligns most closely with the ground-truth PSD in the low-frequency band that dominates perceived speech quality.</p>
-                <p>GAN outputs exhibit broader spectral deviations, while diffusion models show increased energy in higher-frequency regions.</p>
             </div>
         </div>
 
