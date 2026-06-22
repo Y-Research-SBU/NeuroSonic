@@ -17,7 +17,7 @@
 
   <p>
     <sup>1</sup> Stony Brook University &nbsp;&nbsp;
-    <sup>2</sup> UTHealth Houston &nbsp;&nbsp;
+    <sup>2</sup> University of Texas Health Center at Houston &nbsp;&nbsp;
     <sup>3</sup> Emory University
   </p>
 
