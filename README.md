@@ -2,7 +2,7 @@
 
   <h2>NeuroSonic: Conditional Flow Matching<br> for EEG-to-Speech Reconstruction</h2>
 
-  <h4>MICCAI 2026</h4>
+  <h3>✨ MICCAI 2026 ✨</h3>
   
   <br>
   
