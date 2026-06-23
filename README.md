@@ -7,12 +7,12 @@
   <br>
   
   <p>
-    Wenhao Gao<sup>1</sup>&nbsp;
-    Yifan Wang<sup>1</sup>&nbsp;
-    Yijia Ma<sup>2</sup>&nbsp;
-    Carl Yang<sup>3</sup>&nbsp;
-    Wen Li<sup>2</sup>&nbsp;
-    Chenyu You<sup>1</sup>
+    <a href="">Wenhao Gao</a><sup>1</sup>&nbsp;
+    <a href="https://yfwang.me/">Yifan Wang</a><sup>1</sup>&nbsp;
+    <a href="mailto:Yijia.Ma@uth.tmc.edu">Yijia Ma</a><sup>2</sup>&nbsp;
+    <a href="https://www.cs.emory.edu/~jyang71/">Carl Yang</a><sup>3</sup>&nbsp;
+    <a href="https://med.uth.edu/psychiatry/2023/12/19/wen-li-phd/">Wen Li</a><sup>2</sup>&nbsp;
+    <a href="https://chenyuyou.me/">Chenyu You</a><sup>1</sup>
   </p>
 
   <p>
@@ -25,17 +25,14 @@
     <a href="">
       <img src="https://img.shields.io/badge/arXiv-coming%20soon-B31B1B?style=flat-square&logo=arxiv" alt="arXiv">
     </a>
-    <a href="https://github.com/ghh1251/my_miccai">
+    <a href="https://y-research-sbu.github.io/NeuroSonic/">
+      <img src="https://img.shields.io/badge/Project-Page-4285F4?style=flat-square&logo=googlechrome" alt="Project Page">
+    </a>
+    <a href="https://github.com/Y-Research-SBU/NeuroSonic">
       <img src="https://img.shields.io/badge/Code-GitHub-black?style=flat-square&logo=github" alt="Code">
     </a>
     <a href="">
-      <img src="https://img.shields.io/badge/Hugging%20Face-coming%20soon-yellow?style=flat-square&logo=huggingface" alt="Hugging Face">
-    </a>
-    <a href="https://www.python.org/downloads/">
-      <img src="https://img.shields.io/badge/Python-3.10-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.10">
-    </a>
-    <a href="https://pytorch.org/">
-      <img src="https://img.shields.io/badge/PyTorch-2.5.1-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch 2.5.1">
+      <img src="https://img.shields.io/badge/Hugging%20Face-coming%20soon-F9A825?style=flat-square&logo=huggingface" alt="Hugging Face">
     </a>
   </p>
 
