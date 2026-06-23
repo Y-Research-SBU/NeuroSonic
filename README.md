@@ -28,9 +28,6 @@
     <a href="https://y-research-sbu.github.io/NeuroSonic/">
       <img src="https://img.shields.io/badge/Project-Page-4285F4?style=flat-square&logo=googlechrome" alt="Project Page">
     </a>
-    <a href="https://github.com/Y-Research-SBU/NeuroSonic">
-      <img src="https://img.shields.io/badge/Code-GitHub-black?style=flat-square&logo=github" alt="Code">
-    </a>
     <a href="">
       <img src="https://img.shields.io/badge/Hugging%20Face-coming%20soon-F9A825?style=flat-square&logo=huggingface" alt="Hugging Face">
     </a>
