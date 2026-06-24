@@ -22,8 +22,8 @@
   </p>
 
   <p>
-    <a href="">
-      <img src="https://img.shields.io/badge/arXiv-coming%20soon-B31B1B?style=flat-square&logo=arxiv" alt="arXiv">
+    <a href="https://arxiv.org/pdf/2606.24087">
+      <img src="https://img.shields.io/badge/arXiv-2606.24087-B31B1B?style=flat-square&logo=arxiv" alt="arXiv">
     </a>
     <a href="https://y-research-sbu.github.io/NeuroSonic/">
       <img src="https://img.shields.io/badge/Project-Page-4285F4?style=flat-square&logo=googlechrome" alt="Project Page">
@@ -136,7 +136,7 @@ If you find NeuroSonic useful in your research, please cite:
 }
 ```
 
-The arXiv, model, and dataset links will be updated once they are available.
+The model and dataset links will be updated once they are available.
 
 ## Acknowledgements
 
