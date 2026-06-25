@@ -28,8 +28,8 @@
     <a href="https://y-research-sbu.github.io/NeuroSonic/">
       <img src="https://img.shields.io/badge/Project-Page-4285F4?style=flat-square&logo=googlechrome" alt="Project Page">
     </a>
-    <a href="">
-      <img src="https://img.shields.io/badge/Hugging%20Face-coming%20soon-F9A825?style=flat-square&logo=huggingface" alt="Hugging Face">
+    <a href="https://huggingface.co/Y-Research-Group/NeuroSonic">
+      <img src="https://img.shields.io/badge/Hugging%20Face-Models-F9A825?style=flat-square&logo=huggingface" alt="Hugging Face">
     </a>
   </p>
 
@@ -136,7 +136,7 @@ If you find NeuroSonic useful in your research, please cite:
 }
 ```
 
-The model and dataset links will be updated once they are available.
+Pretrained NeuroSonic checkpoints are available on [Hugging Face](https://huggingface.co/Y-Research-Group/NeuroSonic).
 
 ## Acknowledgements
 
