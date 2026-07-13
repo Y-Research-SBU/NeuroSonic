@@ -218,37 +218,146 @@
 
         .video-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 18px;
+            min-width: calc(150% + 9px);
             margin: 18px 0 10px;
+        }
+
+        .video-scroll {
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding-bottom: 8px;
+            margin: 18px 0 10px;
+            scrollbar-color: #F59E0B #FFFBEB;
+        }
+
+        .video-scroll .video-grid {
+            margin: 0;
         }
 
         .video-card {
             background-color: #FFFBEB;
             border: 1px solid #FDE68A;
-            border-radius: 8px;
-            padding: 14px;
+            border-radius: 7px;
+            padding: 4px;
         }
 
         .video-card video {
             width: 100%;
             aspect-ratio: 1417 / 708;
             display: block;
-            border-radius: 6px;
+            border-radius: 4px;
             background: #fff;
+            cursor: zoom-in;
+        }
+
+        .video-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 10px;
+            padding: 0 2px 1px;
         }
 
         .video-card h3 {
             color: #D97706;
-            margin: 12px 0 4px;
+            margin: 0;
             font-size: 18px;
+            text-align: center;
         }
 
-        .video-card p {
-            margin: 0;
-            font-size: 16px;
-            line-height: 1.45em;
-            text-align: left;
+        .video-toggle {
+            border: 1px solid #F59E0B;
+            background: #fff;
+            color: #D97706;
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            padding: 0;
+            font: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.2;
+            cursor: pointer;
+        }
+
+        .video-toggle:hover,
+        .video-toggle:focus {
+            background: #FFFBEB;
+            outline: none;
+        }
+
+        .video-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 28px;
+            background: rgba(17, 24, 39, 0.78);
+        }
+
+        .video-modal.is-open {
+            display: flex;
+        }
+
+        .video-modal-inner {
+            width: min(92vw, 1180px);
+            background: #FFFBEB;
+            border: 1px solid #FDE68A;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
+        }
+
+        .video-modal video {
+            width: 100%;
+            display: block;
+            aspect-ratio: 1417 / 708;
+            background: #fff;
+            border-radius: 5px;
+        }
+
+        .video-modal-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 2px 0;
+        }
+
+        .video-modal-title {
+            color: #D97706;
+            font-weight: 600;
+        }
+
+        .video-modal-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-btn {
+            border: 1px solid #F59E0B;
+            background: #fff;
+            color: #D97706;
+            border-radius: 999px;
+            min-width: 38px;
+            height: 34px;
+            padding: 0 12px;
+            font: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-btn:hover,
+        .modal-btn:focus {
+            background: #FFFBEB;
+            outline: none;
         }
 
         .table-wrap {
@@ -329,6 +438,19 @@
             .video-grid {
                 grid-template-columns: 1fr;
                 gap: 16px;
+            }
+
+            .video-grid {
+                min-width: 100%;
+            }
+
+            .video-modal {
+                padding: 12px;
+            }
+
+            .video-modal-inner {
+                width: 100%;
+                padding: 7px;
             }
 
             .fig-row.fig-right .fig-col {
@@ -423,22 +545,68 @@
         <p>
             The videos visualize generated speech waveforms from NeuroSonic reconstructions. Each clip pairs the reconstructed acoustic trajectory with its corresponding dataset setting.
         </p>
-        <div class="video-grid">
-            <div class="video-card">
-                <video controls preload="metadata" playsinline>
-                    <source src="videos/Cine_sub1_3.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <h3>CineBrain example</h3>
-                <p>Waveform visualization for a CineBrain reconstruction generated from EEG conditioning.</p>
-            </div>
-            <div class="video-card">
-                <video controls preload="metadata" playsinline>
-                    <source src="videos/EAV_sub2_1.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <h3>EAV example</h3>
-                <p>Waveform visualization for an EAV reconstruction generated from EEG conditioning.</p>
+        <div class="video-scroll" aria-label="Generated audio demo videos">
+            <div class="video-grid">
+                <div class="video-card">
+                    <video preload="metadata" playsinline>
+                        <source src="videos/Cine_sub1_3.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-meta">
+                        <h3>CineBrain</h3>
+                        <button class="video-toggle" type="button" aria-label="Play video"><i class="fa-solid fa-play"></i></button>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <video preload="metadata" playsinline>
+                        <source src="videos/Cine_sub3_1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-meta">
+                        <h3>CineBrain</h3>
+                        <button class="video-toggle" type="button" aria-label="Play video"><i class="fa-solid fa-play"></i></button>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <video preload="metadata" playsinline>
+                        <source src="videos/Cine_sub6_1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-meta">
+                        <h3>CineBrain</h3>
+                        <button class="video-toggle" type="button" aria-label="Play video"><i class="fa-solid fa-play"></i></button>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <video preload="metadata" playsinline>
+                        <source src="videos/EAV_sub2_1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-meta">
+                        <h3>EAV</h3>
+                        <button class="video-toggle" type="button" aria-label="Play video"><i class="fa-solid fa-play"></i></button>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <video preload="metadata" playsinline>
+                        <source src="videos/EAV_sub4_2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-meta">
+                        <h3>EAV</h3>
+                        <button class="video-toggle" type="button" aria-label="Play video"><i class="fa-solid fa-play"></i></button>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <video preload="metadata" playsinline>
+                        <source src="videos/EAV_sub6_1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-meta">
+                        <h3>EAV</h3>
+                        <button class="video-toggle" type="button" aria-label="Play video"><i class="fa-solid fa-play"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -566,5 +734,122 @@
 }</code></pre>
     </section>
 </div>
+<div class="video-modal" id="video-modal" aria-hidden="true">
+    <div class="video-modal-inner" role="dialog" aria-modal="true" aria-label="Expanded video">
+        <video id="modal-video" preload="metadata" playsinline></video>
+        <div class="video-modal-bar">
+            <span class="video-modal-title" id="modal-title">CineBrain</span>
+            <div class="video-modal-actions">
+                <button class="modal-btn" type="button" id="modal-toggle" aria-label="Play video"><i class="fa-solid fa-play"></i></button>
+                <button class="modal-btn" type="button" id="modal-close" aria-label="Close enlarged video"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const modal = document.getElementById('video-modal');
+    const modalVideo = document.getElementById('modal-video');
+    const modalTitle = document.getElementById('modal-title');
+    const modalToggle = document.getElementById('modal-toggle');
+    const modalToggleIcon = modalToggle.querySelector('i');
+    const modalClose = document.getElementById('modal-close');
+
+    function setButtonState(button, icon, isPlaying) {
+        icon.className = isPlaying ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+        button.setAttribute('aria-label', isPlaying ? 'Pause video' : 'Play video');
+    }
+
+    function closeModal() {
+        modalVideo.pause();
+        modalVideo.removeAttribute('src');
+        modalVideo.load();
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        setButtonState(modalToggle, modalToggleIcon, false);
+    }
+
+    function openModal(video, title) {
+        document.querySelectorAll('.video-card video').forEach((otherVideo) => {
+            otherVideo.pause();
+        });
+        modalTitle.textContent = title;
+        modalVideo.src = video.currentSrc || video.querySelector('source').src;
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        modalVideo.currentTime = video.currentTime || 0;
+        modalVideo.play().catch(() => {});
+    }
+
+    document.querySelectorAll('.video-card').forEach((card) => {
+        const video = card.querySelector('video');
+        const button = card.querySelector('.video-toggle');
+        const icon = button.querySelector('i');
+        const title = card.querySelector('h3').textContent.trim();
+
+        button.addEventListener('click', async () => {
+            document.querySelectorAll('.video-card video').forEach((otherVideo) => {
+                if (otherVideo !== video) {
+                    otherVideo.pause();
+                }
+            });
+
+            if (video.paused) {
+                await video.play();
+            } else {
+                video.pause();
+            }
+        });
+
+        video.addEventListener('click', () => {
+            openModal(video, title);
+        });
+
+        video.addEventListener('play', () => {
+            setButtonState(button, icon, true);
+        });
+
+        video.addEventListener('pause', () => {
+            setButtonState(button, icon, false);
+        });
+
+        video.addEventListener('ended', () => {
+            setButtonState(button, icon, false);
+        });
+    });
+
+    modalToggle.addEventListener('click', async () => {
+        if (modalVideo.paused) {
+            await modalVideo.play();
+        } else {
+            modalVideo.pause();
+        }
+    });
+
+    modalVideo.addEventListener('play', () => {
+        setButtonState(modalToggle, modalToggleIcon, true);
+    });
+
+    modalVideo.addEventListener('pause', () => {
+        setButtonState(modalToggle, modalToggleIcon, false);
+    });
+
+    modalVideo.addEventListener('ended', () => {
+        setButtonState(modalToggle, modalToggleIcon, false);
+    });
+
+    modalClose.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+            closeModal();
+        }
+    });
+</script>
 </body>
 </html>
