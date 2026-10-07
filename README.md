@@ -23,16 +23,16 @@
 
   <p>
     <a href="https://arxiv.org/pdf/2606.24087">
-      <img src="https://img.shields.io/badge/arXiv-2606.24087-B31B1B?style=flat-square&logo=arxiv" alt="arXiv">
+      <img src="https://img.shields.io/badge/arXiv-2606.24087-24292F?style=flat-square&logo=arxiv&logoColor=white" alt="arXiv">
     </a>
     <a href="https://y-research-sbu.github.io/NeuroSonic/">
-      <img src="https://img.shields.io/badge/Project-Page-4285F4?style=flat-square&logo=googlechrome" alt="Project Page">
+      <img src="https://img.shields.io/badge/Project-Page-24292F?style=flat-square&logo=googlechrome&logoColor=white" alt="Project Page">
     </a>
     <a href="https://huggingface.co/Y-Research-Group/NeuroSonic">
-      <img src="https://img.shields.io/badge/Hugging%20Face-Models-F9A825?style=flat-square&logo=huggingface" alt="Hugging Face Models">
+      <img src="https://img.shields.io/badge/Hugging%20Face-Models-24292F?style=flat-square&logo=huggingface&logoColor=white" alt="Hugging Face Models">
     </a>
     <a href="https://huggingface.co/datasets/Y-Research-Group/NeuroSonic">
-      <img src="https://img.shields.io/badge/Hugging%20Face-Dataset-FF6F00?style=flat-square&logo=huggingface" alt="Hugging Face Dataset">
+      <img src="https://img.shields.io/badge/Hugging%20Face-Dataset-24292F?style=flat-square&logo=huggingface&logoColor=white" alt="Hugging Face Dataset">
     </a>
   </p>
 
