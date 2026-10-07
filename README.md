@@ -29,7 +29,10 @@
       <img src="https://img.shields.io/badge/Project-Page-4285F4?style=flat-square&logo=googlechrome" alt="Project Page">
     </a>
     <a href="https://huggingface.co/Y-Research-Group/NeuroSonic">
-      <img src="https://img.shields.io/badge/Hugging%20Face-Models-F9A825?style=flat-square&logo=huggingface" alt="Hugging Face">
+      <img src="https://img.shields.io/badge/Hugging%20Face-Models-F9A825?style=flat-square&logo=huggingface" alt="Hugging Face Models">
+    </a>
+    <a href="https://huggingface.co/datasets/Y-Research-Group/NeuroSonic">
+      <img src="https://img.shields.io/badge/Hugging%20Face-Dataset-FF6F00?style=flat-square&logo=huggingface" alt="Hugging Face Dataset">
     </a>
   </p>
 
