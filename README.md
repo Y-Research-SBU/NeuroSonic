@@ -128,7 +128,7 @@ neurosonic/
 
 ## Citation
 
-If you find NeuroSonic useful in your research, please cite:
+If you find NeuroSonic useful in your research, or if you use our pretrained checkpoints or the NeuroSonic dataset, please cite:
 
 ```bibtex
 @inproceedings{gao2026neurosonic,
@@ -139,7 +139,7 @@ If you find NeuroSonic useful in your research, please cite:
 }
 ```
 
-Pretrained NeuroSonic checkpoints are available on [Hugging Face](https://huggingface.co/Y-Research-Group/NeuroSonic).
+Pretrained NeuroSonic checkpoints are available on [Hugging Face](https://huggingface.co/Y-Research-Group/NeuroSonic), and the NeuroSonic dataset is available at [Hugging Face Datasets](https://huggingface.co/datasets/Y-Research-Group/NeuroSonic).
 
 ## Acknowledgements
 
